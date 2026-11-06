@@ -30,7 +30,7 @@ export function analyse(data, options={}) {
         recommendations.push({id:'transfer|'+key+'|'+target,kind:'Transfer',store:target,from:item.store,sku:item.sku,band:weightBand(item.weight_g),qty:1,title:`Review ${item.sku}: ${item.store} to ${target}`,evidence:`${inquiries.length} matching unmet inquiries at ${target}; ${targetQty} pieces in its weight band. Source: ${item.qty} pieces, ${sourceSold} sold in ${window} days, oldest receipt ${age} days ago.`,check:'Confirm style and final price with both managers. One piece is a review proposal under demo rules; keep the source reserve.',cost:item.unit_cost});
       }
     }
-    recommendations.push({id:'reduce|'+key,kind:'Reduce replenishment',store:item.store,sku:item.sku,band:weightBand(item.weight_g),qty:null,title:`Review future orders for ${item.sku}`,evidence:`${item.qty} pieces remain; ${sourceSold} sold in ${window} days; receipt age ${age} days.`,check:'Check display requirements, availability history and special customers before reducing orders.'});
+    recommendations.push({id:'reduce|'+key,kind:'Reduce replenishment',store:item.store,sku:item.sku,band:weightBand(item.weight_g),qty:null,title:`Review future orders for ${item.sku} at ${item.store}`,evidence:`${item.qty} pieces remain; ${sourceSold} sold in ${window} days; receipt age ${age} days.`,check:'Check display requirements, availability history and special customers before reducing orders.'});
   }
   for(const store of STORES) for(let band=0;band<4;band++) {
     const items=stock.filter(x=>x.store===store&&weightBand(x.weight_g)===band);
